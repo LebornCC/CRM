@@ -240,7 +240,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 		$("#exportActivityAllBtn").click(function () {
 			window.location.href='workbench/activity/exportAllActivity.do';
 		})
-
+			// asadad
 		$("#importActivityBtn").click(function () {
 			var filename = $("#activityFile").val();
 			var suffix = filename.substr(filename.lastIndexOf('.')+1);
@@ -248,6 +248,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				alert("只能选择xls文件");
 				return;
 			}
+
 
 			var activityFile = $("#activityFile")[0].files[0]
 			if(activityFile.size > 5*1024*1024){
