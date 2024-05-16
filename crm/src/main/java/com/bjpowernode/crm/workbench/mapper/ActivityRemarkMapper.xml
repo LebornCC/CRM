@@ -165,11 +165,16 @@
       activity_id = #{activityId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
-  <select id="selectActivityRemarkById" parameterType="string" resultType="com.bjpowernode.crm.workbench.domain.ActivityRemark">
+  <select id="selectActivityRemarkById" parameterType="string" resultMap="BaseResultMap">
     select tar.id,tar.note_content,tar.create_time,u1.name as create_by ,tar.edit_time,u2.name as edit_by ,tar.edit_flag
     from tbl_activity_remark as tar
     join tbl_user u1 on tar.create_by = u1.id
     left join tbl_user u2 on tar.edit_by = u2.id
     where tar.activity_id = #{id}
    </select>
+
+  <insert id="saveActivityRemarkFromDetail" parameterType="com.bjpowernode.crm.workbench.domain.ActivityRemark" >
+    insert into tbl_activity_remark (id, note_content, create_time, create_by, edit_time, edit_by, edit_flag, activity_id)
+    values (#{id},#{noteContent},#{createTime},#{createBy},#{editTime},#{editBy},#{editFlag},#{activityId})
+  </insert>
 </mapper>

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ActivityRemarkService {
     List<ActivityRemark> selectActivityRemarkById(String id);
+
+    int saveActivityRemarkFromDetail(ActivityRemark activityRemark);
 }
