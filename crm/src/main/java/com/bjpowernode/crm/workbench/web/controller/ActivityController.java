@@ -215,6 +215,7 @@ public class ActivityController {
 //            outputStream.write(bt);
 //        }
 //        is.close();
+
         wb.write(outputStream);
         wb.close();
         outputStream.flush();
