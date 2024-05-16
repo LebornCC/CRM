@@ -53,5 +53,10 @@ public class ActivityServiceImpl implements ActivityService {
         return activities.importActivity(activity);
     }
 
+    @Override
+    public Activity queryActivityForDetail(String id) {
+        return activities.queryActivityForDetail(id);
+    }
+
 
 }

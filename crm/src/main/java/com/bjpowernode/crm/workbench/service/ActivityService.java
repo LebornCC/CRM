@@ -21,4 +21,6 @@ public interface ActivityService {
     List<Activity> exportAllActivity();
 
     int importActivity(List<Activity> activities);
+
+    Activity queryActivityForDetail(String id);
 }

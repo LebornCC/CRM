@@ -283,4 +283,16 @@
     </foreach>
 
   </insert>
+
+  <select id="queryActivityForDetail" parameterType="string" resultMap="BaseResultMap">
+    select a.id, u1.name as owner, a.name,a.start_date,a.end_date,a.cost,a.description,a.create_time,u2.name as create_by,
+    a.edit_time,u3.name as edit_by
+    from tbl_activity a
+    join tbl_user u1 on u1.id = a.owner
+    join tbl_user u2 on u2.id = a.create_by
+    left join tbl_user u3 on a.edit_by = u3.id
+    where a.id = #{id}
+
+
+  </select>
 </mapper>
