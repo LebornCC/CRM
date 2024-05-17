@@ -25,4 +25,10 @@ public interface ActivityService {
     Activity queryActivityForDetail(String id);
 
     List<Activity> selectActivityForDetailByCludeId(String clueId);
+
+    List<Activity> selectActivityForDetailByNameClueId(Map<String,Object> map);
+
+    List<Activity> selectActivityByClueActivityRelation(String[] id);
+
+
 }

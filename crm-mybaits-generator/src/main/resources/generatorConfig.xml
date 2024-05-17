@@ -70,7 +70,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="tbl_clue_remark" domainObjectName="ClueRemark"
+        <table tableName="tbl_clue_activity_relation" domainObjectName="ClueActivityRelation"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

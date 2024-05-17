@@ -55,10 +55,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 
 		$("#bundActivityBtn").click(function () {
 
-			$("#searchActivityTxt").val("");
-			//清空搜索的市场活动列表
-			$("#tBody").html("");
-
 			$("#bundModal").modal("show");
 		});
 
