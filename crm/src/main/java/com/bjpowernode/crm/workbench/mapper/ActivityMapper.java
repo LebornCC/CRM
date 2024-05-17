@@ -76,4 +76,6 @@ public interface ActivityMapper {
     int importActivity(List<Activity> activities);
 
     Activity queryActivityForDetail(String id);
+
+    List<Activity> selectActivityForDetailByCludeId(String clueId);
 }

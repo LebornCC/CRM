@@ -19,7 +19,60 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 <script type="text/javascript">
 
 	$(function(){
-		
+		$("#createClueModal").click(function () {
+			$("#createClueForm")[0].reset();
+			$("#createClueModal").modal("show");
+		});
+		$("#saveCreateClueBtn").click(function () {
+
+			var owner            = $("#create-owner").val();
+			var company          = $("#create-company").val();
+			var appellation      = $("#create-appellation").val();
+			var fullname         = $("#create-fullname").val();
+			var job              = $("#create-job").val();
+			var email            = $("#create-email").val();
+			var phone            = $("#create-phone").val();
+			var website          = $("#create-website").val();
+			var mphone           = $("#create-mphone").val();
+			var state            = $("#create-state").val();
+			var source           = $("#create-source").val();
+			var description      = $("#create-description").val();
+			var contactSummary   = $("#create-contactSummary").val();
+			var nextContactTime  = $("#create-nextContactTime").val();
+			var address          = $("#create-address").val();
+
+		$.ajax({
+			url: 'workbench/clue/insertCreateClue.do',
+			data: ({
+				owner: owner,
+				company: company,
+				appellation: appellation,
+				fullname: fullname,
+				job: job,
+				email: email,
+				phone: phone,
+				website: website,
+				mphone: mphone,
+				state: state,
+				source: source,
+				description: description,
+				contactSummary: contactSummary,
+				nextContactTime: nextContactTime,
+				address: address
+			}),
+			type: 'post',
+			datatype: "json",
+			success: function (data) {
+				if (data.code === "1") {
+					$("#createClueModal").modal("hide");
+				} else {
+					alert(data.message);
+					//模态窗口不关闭
+					$("#createClueModal").modal("show");
+				}
+			}
+			});
+		});
 		
 		
 	});
@@ -42,9 +95,9 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 					<form class="form-horizontal" role="form">
 					
 						<div class="form-group">
-							<label for="create-clueOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-owner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-clueOwner">
+								<select class="form-control" id="create-owner">
 									<c:forEach items="${users}" var="u">
 										<option value="${u.id}">${u.name}</option>
 									</c:forEach>
@@ -57,18 +110,18 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 						</div>
 						
 						<div class="form-group">
-							<label for="create-call" class="col-sm-2 control-label">称呼</label>
+							<label for="create-appellation" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-call">
+								<select class="form-control" id="create-appellation">
 								  <option></option>
 									<c:forEach items="${appellation}" var="app">
 										<option value="${app.id}">${app.value}</option>
 									</c:forEach>
 								</select>
 							</div>
-							<label for="create-surname" class="col-sm-2 control-label">姓名<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-fullname" class="col-sm-2 control-label">姓名<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-surname">
+								<input type="text" class="form-control" id="create-fullname">
 							</div>
 						</div>
 						
@@ -99,9 +152,9 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="create-mphone">
 							</div>
-							<label for="create-status" class="col-sm-2 control-label">线索状态</label>
+							<label for="create-state" class="col-sm-2 control-label">线索状态</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-status">
+								<select class="form-control" id="create-state">
 								  <option></option>
 									<c:forEach items="${clueState}" var="clu">
 										<option value="${clu.id}">${clu.value}</option>
@@ -124,9 +177,9 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 						
 
 						<div class="form-group">
-							<label for="create-describe" class="col-sm-2 control-label">线索描述</label>
+							<label for="create-description" class="col-sm-2 control-label">线索描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="create-describe"></textarea>
+								<textarea class="form-control" rows="3" id="create-description"></textarea>
 							</div>
 						</div>
 						
@@ -162,7 +215,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-primary" id="saveCreateClueBtn">保存</button>
 				</div>
 			</div>
 		</div>
@@ -418,7 +471,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 					<tbody>
 						<tr>
 							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='workbench/clue/queryClueForDetailById.do?id=5afc40ffa607411daf3edb4b64b662eb';">李四先生</a></td>
 							<td>动力节点</td>
 							<td>010-84846003</td>
 							<td>12345678901</td>
@@ -428,7 +481,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 						</tr>
                         <tr class="active">
                             <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">李四先生</a></td>
+                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.jsp';">李四先生</a></td>
                             <td>动力节点</td>
                             <td>010-84846003</td>
                             <td>12345678901</td>
