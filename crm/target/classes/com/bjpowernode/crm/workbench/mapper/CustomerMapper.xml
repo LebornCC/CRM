@@ -238,4 +238,16 @@
             #{description,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
            )
   </insert>
+
+  <select id="selectAllCustomer" parameterType="string" resultType="string">
+    select name
+    from tbl_customer
+    where name like '%' #{customerName} '%'
+  </select>
+
+  <select id="selectCustomerByName" parameterType="string" resultType="com.bjpowernode.crm.workbench.domain.Customer">
+    select <include refid="Base_Column_List" />
+    from tbl_customer
+    where name = #{name}
+  </select>
 </mapper>

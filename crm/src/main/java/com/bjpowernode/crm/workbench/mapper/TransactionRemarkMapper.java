@@ -54,4 +54,6 @@ public interface TransactionRemarkMapper {
     int updateByPrimaryKey(TransactionRemark record);
 
     int insertTransactionRemark(List<TransactionRemark> transactionRemarkList);
+
+    List<TransactionRemark> selectTranRemarkForDetailByTransId(String transId);
 }

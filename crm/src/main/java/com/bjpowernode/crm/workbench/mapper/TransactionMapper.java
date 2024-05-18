@@ -1,6 +1,9 @@
 package com.bjpowernode.crm.workbench.mapper;
 
+import com.bjpowernode.crm.workbench.domain.FunnelVO;
 import com.bjpowernode.crm.workbench.domain.Transaction;
+
+import java.util.List;
 
 public interface TransactionMapper {
     /**
@@ -52,4 +55,9 @@ public interface TransactionMapper {
     int updateByPrimaryKey(Transaction record);
 
     int insertTransaction(Transaction transaction);
+
+    Transaction selectTransForDetailById(String id);
+
+
+    List<FunnelVO> selectCountOfTrans();
 }

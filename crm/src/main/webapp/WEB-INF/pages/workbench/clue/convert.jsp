@@ -63,6 +63,18 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 
 		});
 
+		$("#tBody").on("click","input[type='radio']",function () {
+			//获取市场活动的id和name
+			var id=this.value;
+			var activityName=$(this).attr("activityName");
+			//把市场活动的id写到隐藏域，把name写到输入框中
+			$("#activityId").val(id);
+			$("#activityName").val(activityName);
+			//关闭搜索市场活动的模态窗口
+			$("#searchActivityModal").modal("hide");
+		});
+
+
 		$("#saveConvertClueBtn").click(function () {
 			var clueId='${clue.id}';
 			var money=$.trim($("#amountOfMoney").val());

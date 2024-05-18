@@ -134,6 +134,8 @@ public class ClueServiceImpl implements ClueService {
                 contactsActivityRelation.setId(UUIDUtil.UUID());
                 contactsActivityRelationList.add(contactsActivityRelation);
             }
+            clueActivityRelationService.insertClueActivityRelationByActivityList(clueActivityRelationList);
+
         }
         if("true".equals(isCreateTran)){
             Transaction tran=new Transaction();

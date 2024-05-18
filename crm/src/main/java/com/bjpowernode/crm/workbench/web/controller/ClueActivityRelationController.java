@@ -28,8 +28,9 @@ public class ClueActivityRelationController {
     public @ResponseBody Object saveClueActivityRelationByList(String[] activityId,String clueId){
         ReturnObject returnObject = new ReturnObject();
         List<ClueActivityRelation> clueActivityRelationList =new ArrayList<>();
-        ClueActivityRelation clueActivityRelation = new ClueActivityRelation();
+        ClueActivityRelation clueActivityRelation = null;
         for (String s : activityId) {
+            clueActivityRelation = new ClueActivityRelation();
             clueActivityRelation.setActivityId(s);
             clueActivityRelation.setClueId(clueId);
             clueActivityRelation.setId(UUIDUtil.UUID());

@@ -70,11 +70,16 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="tbl_tran_remark" domainObjectName="TransactionRemark"
+        <table tableName="tbl_tran_history" domainObjectName="TransHistory"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+<!--        <table tableName="tbl_tran_remark" domainObjectName="TransactionRemark"-->
+<!--               enableCountByExample="false" enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--        </table>-->
 
 
 <!--        <table tableName="tbl_contacts_activity_relation" domainObjectName="ContactsActivityRelation"-->
