@@ -73,5 +73,10 @@ public class ActivityServiceImpl implements ActivityService {
         return activities.selectActivityByClueActivityRelation(id);
     }
 
+    @Override
+    public List<Activity> queryActivityForConvertByNameClue(Map<String, Object> map) {
+        return activities.selectActivityForConvertByNameClueId(map);
+    }
+
 
 }

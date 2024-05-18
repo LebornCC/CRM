@@ -49,4 +49,22 @@ public class ClueActivityRelationController {
 
         return returnObject;
     }
+
+    @RequestMapping("workbench/clue/deleteClueActivityRelation.do")
+    public @ResponseBody Object deleteClueActivityRelation(String clueId,String activityId){
+        ClueActivityRelation clueActivityRelation = new ClueActivityRelation();
+        clueActivityRelation.setClueId(clueId);
+        clueActivityRelation.setActivityId(activityId);
+        ReturnObject returnObject = new ReturnObject();
+
+        int ret = clueActivityRelationService.deleteClueActivityRelation(clueActivityRelation);
+
+        if (ret > 0){
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+        }else {
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage("解除关联失败");
+        }
+        return returnObject;
+    }
 }

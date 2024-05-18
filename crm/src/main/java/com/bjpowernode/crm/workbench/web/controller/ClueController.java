@@ -4,7 +4,9 @@ import com.bjpowernode.crm.commons.contants.Contants;
 import com.bjpowernode.crm.commons.domain.ReturnObject;
 import com.bjpowernode.crm.commons.utils.DataUtil;
 import com.bjpowernode.crm.commons.utils.UUIDUtil;
+import com.bjpowernode.crm.settings.domain.DicValue;
 import com.bjpowernode.crm.settings.domain.User;
+import com.bjpowernode.crm.settings.service.DicValueService;
 import com.bjpowernode.crm.workbench.domain.Activity;
 import com.bjpowernode.crm.workbench.domain.Clue;
 import com.bjpowernode.crm.workbench.domain.ClueRemark;
@@ -31,6 +33,8 @@ public class ClueController {
     private ActivityService activityService;
     @Autowired
     private ClueRemarkService clueRemarkService;
+    @Autowired
+    private DicValueService dicValueService;
     @RequestMapping("workbench/clue/insertCreateClue.do")
     public @ResponseBody Object insertCreateClue(HttpSession session,Clue clue){
         ReturnObject returnObject = new ReturnObject();
@@ -72,6 +76,26 @@ public class ClueController {
         List<Activity> activityList = activityService.selectActivityForDetailByNameClueId(map);
 
 
+        return activityList;
+    }
+    @RequestMapping("workbench/clue/ClueTransformer.do")
+    public String ClueTransformer(String id,HttpServletRequest request){
+        Clue clue = clueService.selectClueForDetailById(id);
+
+        List<DicValue> stage = dicValueService.selectDicValueBytypeCode("stage");
+
+        request.setAttribute("clue",clue);
+        request.setAttribute("stage",stage);
+
+        return "workbench/clue/convert";
+
+    }
+    @RequestMapping("workbench/clue/selectActivityForConvert.do")
+    public @ResponseBody Object selectActivityForConvert(String activityName,String clueId){
+        Map<String,Object> map =new HashMap<>();
+        map.put("activityName",activityName);
+        map.put("clueId",clueId);
+        List<Activity> activityList = activityService.queryActivityForConvertByNameClue(map);
         return activityList;
     }
 }

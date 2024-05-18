@@ -55,4 +55,6 @@ public interface ClueActivityRelationMapper {
     int updateByPrimaryKey(ClueActivityRelation record);
 
     int insertClueActivityRelationByActivityList(List<ClueActivityRelation> clueActivityRelationList);
+
+    int deleteClueActivityRelation(ClueActivityRelation relation);
 }

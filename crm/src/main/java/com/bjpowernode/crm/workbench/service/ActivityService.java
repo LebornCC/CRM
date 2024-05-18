@@ -30,5 +30,7 @@ public interface ActivityService {
 
     List<Activity> selectActivityByClueActivityRelation(String[] id);
 
+    List<Activity> queryActivityForConvertByNameClue(Map<String,Object> map);
+
 
 }

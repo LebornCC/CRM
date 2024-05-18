@@ -55,6 +55,10 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 
 		$("#bundActivityBtn").click(function () {
 
+			$("#searchActivityTxt").val("");
+			//清空搜索的市场活动列表
+			$("#tBody").html("");
+
 			$("#bundModal").modal("show");
 		});
 
@@ -114,7 +118,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 							htmlStr+="<td>"+obj.startDate+"</td>";
 							htmlStr+="<td>"+obj.endDate+"</td>";
 							htmlStr+="<td>"+obj.owner+"</td>";
-							htmlStr+="<td><a href=\"javascript:void(0);\"  style=\"text-decoration: none;\"><span class=\"glyphicon glyphicon-remove\"></span>解除关联</a></td>";
+							htmlStr+="<td><a href=\"javascript:void(0);\" activityId=\""+obj.id+"\"  style=\"text-decoration: none;\"><span class=\"glyphicon glyphicon-remove\"></span>解除关联</a></td>";
 							htmlStr+="</tr>";
 						})
 						$("#relationBody").append(htmlStr);
@@ -125,7 +129,38 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				}
 			});
 
+
+
 		})
+
+		$("#relationBody").on("click","a",function () {
+			var clueId = '${clue.id}';
+			var activityId = $(this).attr("activityId");
+			if(window.confirm("确定删除吗？")){
+				$.ajax({
+					url:'workbench/clue/deleteClueActivityRelation.do',
+					data:{
+						clueId :clueId,
+						activityId:activityId,
+					},
+					type:'post',
+					dataType:'json',
+					success:function (data) {
+						if(data.code === "1"){
+							$("#tr_"+activityId).remove();
+						}else {
+							alert(data.message);
+						}
+					}
+				})
+			}
+
+		})
+
+		$("#convertBtn").click(function () {
+			window.location.href = "workbench/clue/ClueTransformer.do?id=${clue.id}";
+		});
+
 
 	});
 	
@@ -202,7 +237,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 			<h3>李四先生 <small>动力节点</small></h3>
 		</div>
 		<div style="position: relative; height: 50px; width: 500px;  top: -72px; left: 700px;">
-			<button type="button" class="btn btn-default" onclick="window.location.href='convert.html';"><span class="glyphicon glyphicon-retweet"></span> 转换</button>
+			<button type="button" class="btn btn-default" id="convertBtn"><span class="glyphicon glyphicon-retweet"></span> 转换</button>
 			
 		</div>
 	</div>
@@ -377,7 +412,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 					</thead>
 					<tbody id="relationBody">
 					<c:forEach items="${activityList}" var="act">
-						<tr>
+						<tr id="tr_${act.id}">
 							<td>${act.name}</td>
 							<td>${act.startDate}</td>
 							<td>${act.endDate}</td>
