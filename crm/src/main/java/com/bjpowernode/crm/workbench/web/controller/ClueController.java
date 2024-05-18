@@ -98,4 +98,28 @@ public class ClueController {
         List<Activity> activityList = activityService.queryActivityForConvertByNameClue(map);
         return activityList;
     }
+    @RequestMapping("workbench/clue/convertClue.do")
+    public @ResponseBody Object convertClue(String clueId,String money,String name,String expectedDate,String stage,String activityId,String isCreateTran,HttpSession session){
+        Map<String,Object> map = new HashMap<>();
+        map.put("clueId",clueId);
+        map.put("money",money);
+        map.put("name",name);
+        map.put("expectedDate",expectedDate);
+        map.put("stage",stage);
+        map.put("activityId",activityId);
+        map.put("isCreateTran",isCreateTran);
+        User user = (User) session.getAttribute(Contants.SESSEIONUSER_NAME);
+        map.put(Contants.SESSEIONUSER_NAME,user);
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            clueService.saveConvertClue(map);
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_SUCCESS);
+        } catch (Exception e) {
+            returnObject.setCode(Contants.RETURN_OBJECT_CODE_FAIL);
+            returnObject.setMessage("转换失败请重试");
+            throw new RuntimeException(e);
+        }
+        return returnObject;
+
+    }
 }

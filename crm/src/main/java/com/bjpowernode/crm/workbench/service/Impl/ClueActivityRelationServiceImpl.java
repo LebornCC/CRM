@@ -21,4 +21,9 @@ public class ClueActivityRelationServiceImpl implements ClueActivityRelationServ
     public int deleteClueActivityRelation(ClueActivityRelation clueActivityRelation) {
         return clueActivityRelationMapper.deleteClueActivityRelation(clueActivityRelation);
     }
+
+    @Override
+    public List<ClueActivityRelation> selectClueActivityRelationForConvert(String id) {
+        return clueActivityRelationMapper.selectClueActivityRelationForConvert(id);
+    }
 }

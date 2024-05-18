@@ -331,4 +331,11 @@
     from tbl_clue
     where id = #{id}
   </select>
+
+  <select id="selectClueForConvertById" parameterType="string" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tbl_clue
+    where id = #{id}
+  </select>
 </mapper>

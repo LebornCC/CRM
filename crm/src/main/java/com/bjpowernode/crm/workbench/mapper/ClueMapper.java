@@ -57,5 +57,7 @@ public interface ClueMapper {
 
     Clue selectClueForDetaillById(String id);
 
+    Clue selectClueForConvertById(String id);
+
 
 }
